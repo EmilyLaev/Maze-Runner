@@ -62,6 +62,10 @@ public class Main {
         }
     }
 
+    //This is a method to save a maze by writing it to a file
+    //the maze is saved under the path name entered by the user
+    //maze is converted to a character ArrayList through invoking method mazeToText
+    //there is an error if the path name is unavailable
     public static void saveMaze(Maze maze) {
         System.out.println("Enter path of where to save maze:");
         Scanner scan = new Scanner(System.in);
@@ -78,6 +82,8 @@ public class Main {
         }
     }
 
+    //Previously saved mazes are loaded once user enters correct path name
+    //
     public static Maze loadMaze(){
         System.out.println("Enter path of maze to be loaded");
         Scanner scan = new Scanner(System.in);
