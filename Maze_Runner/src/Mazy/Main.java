@@ -10,6 +10,9 @@ import java.util.Arrays;
 
 public class Main {
 
+    //This is the main running of the program.  It prints a menu for the user to pick amoung
+    //the various options, to generate, load, save, display, find path, or exit
+    //A maze must already be displayed for options 3, 4 or 5 to be available.
     public static void main(String[] args) {
         boolean currentMaze = false;
         boolean on = true;
@@ -83,7 +86,7 @@ public class Main {
     }
 
     //Previously saved mazes are loaded once user enters correct path name
-    //
+    //The file is opened and the maze object is displayed 
     public static Maze loadMaze(){
         System.out.println("Enter path of maze to be loaded");
         Scanner scan = new Scanner(System.in);
@@ -140,7 +143,8 @@ public class Main {
         return maze;
     }
 
-    //method generateMaze
+    //This is the method that creates a new maze object and fills it with values
+    //First the user is asked for dimensions,
     public static Maze generateMaze() {
         int H;
         //int W = 0;
@@ -210,7 +214,7 @@ public class Main {
         System.out.println();
     }
 
-    //method createNodes
+    //method to create the nodes an put them in an arraylist
     public static ArrayList<Node> createNodes(int H, int W) {
         ArrayList<Node> nodeList = new ArrayList<>();
         for (int i = 0; i < H; i++) {
@@ -227,7 +231,7 @@ public class Main {
         return nodeList;
     }
 
-    //method createEdges
+    //A method to create edges between nodes and put them in an arraylist
     public static ArrayList<Edge> createEdges(ArrayList<Node> nodeList, int h, int w) {
         ArrayList<Edge> Edges = new ArrayList<>();
         int count = h * w;
@@ -261,6 +265,8 @@ public class Main {
     }
 
     //method Algorithm
+    //This is the implenmation of the Prim's Spanning tree algorithm, it takes the nodelist, edgelist as well as empty lists
+    //As inputs.  The empty lists are updated to hold 
     public static void Alg(ArrayList<Node> nodes, ArrayList<Edge> edges, ArrayList<Edge> feList, ArrayList<Node> fnList) {
         int k = nodes.size();
         Node startNode = nodes.get(0);
@@ -284,7 +290,7 @@ public class Main {
         }
     }
 
-    //method minEdge
+    //This is a method to find the minimum weighted edge from a list
     public static Edge minEdge(ArrayList<Edge> edges) {
         Edge addingEdge = edges.get(0);
         for (int i = 0; i < edges.size(); i++) {
@@ -295,7 +301,7 @@ public class Main {
         return addingEdge;
     }
 
-    //method delDoubles
+    //method to delete edges listed more than once in a list
     public static void delDoubles(ArrayList<Edge> edges) {
         for (int i = 0; i < edges.size(); i++) {
             for (int j = i + 1; j < edges.size(); j++) {
@@ -306,7 +312,7 @@ public class Main {
         }
     }
 
-    //Method delCopies
+    //Method to delete edges 
     public static void delCopies(ArrayList<Edge> same, ArrayList<Edge> reduce) {
         for (int i = 0; i < same.size(); i++) {
             for (int j = 0; j < reduce.size(); j++) {
@@ -470,7 +476,7 @@ public class Main {
                 Path.clear();
                 Path.add(Ent);
                 count = 0;
-                System.out.println("Happened here");
+                //System.out.println("Happened here");
             }
         }
         System.out.println("Finished here");
