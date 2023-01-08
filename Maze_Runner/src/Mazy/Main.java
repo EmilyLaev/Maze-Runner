@@ -109,7 +109,7 @@ public class Main {
     }
 
 
-    //method mazeToText
+    //This method turns the integer values of a maze into a string of characters
     public static ArrayList<Character> mazeToText(Maze maze) {
         ArrayList<Character> textForm = new ArrayList<>();
         for (int i = 0; i < maze.H; i++) {
@@ -126,7 +126,7 @@ public class Main {
         return textForm;
     }
 
-    //method textToMaze
+    //This method turns the text of a string of characters into integer values for the maze
     public static Maze textToMaze(String text, Maze maze) {
         for (int i = 0; i < maze.H; i++) {
             for (int j = 0; j < maze.W; j++) {
@@ -144,7 +144,9 @@ public class Main {
     }
 
     //This is the method that creates a new maze object and fills it with values
-    //First the user is asked for dimensions,
+    //First the user is asked for dimensions, then the maze object is created
+    //The algorithm creates a randomized maze
+    //The exit points of the maze are determined then the pathways of the maze
     public static Maze generateMaze() {
         int H;
         //int W = 0;
@@ -192,7 +194,8 @@ public class Main {
         return myMaze;
     }
 
-    //method drawMaze
+    //This method takes the field value of the maze and displays it
+    //if drawPath is true the path is highlight, if false it is ignored
     public static void drawMaze(Maze maze, boolean drawPath) {
         System.out.println();
         for (int i = 0; i < maze.H; i++) {
@@ -251,7 +254,7 @@ public class Main {
         return Edges;
     }
 
-    //method setConEdges
+    //A method to sort out which nodes are connected to which edges.
     public static void setConEdges(ArrayList<Node> nodes, ArrayList<Edge> edges) {
         for (int i = 0; i < nodes.size(); i++) {
             Node thisNode = nodes.get(i);
@@ -266,7 +269,7 @@ public class Main {
 
     //method Algorithm
     //This is the implenmation of the Prim's Spanning tree algorithm, it takes the nodelist, edgelist as well as empty lists
-    //As inputs.  The empty lists are updated to hold 
+    //As inputs.  The empty lists are updated to have only edges that are connected in the maze
     public static void Alg(ArrayList<Node> nodes, ArrayList<Edge> edges, ArrayList<Edge> feList, ArrayList<Node> fnList) {
         int k = nodes.size();
         Node startNode = nodes.get(0);
@@ -312,7 +315,7 @@ public class Main {
         }
     }
 
-    //Method to delete edges 
+    //Method to delete edges from one list if they are in another
     public static void delCopies(ArrayList<Edge> same, ArrayList<Edge> reduce) {
         for (int i = 0; i < same.size(); i++) {
             for (int j = 0; j < reduce.size(); j++) {
@@ -323,7 +326,7 @@ public class Main {
         }
     }
 
-    //method newNode
+    //This method finds the next node connected to an edge
     public static Node newNode(ArrayList<Node> nodes, Edge addingEdge) {
         boolean checkA = false;
         boolean checkB = false;
@@ -343,7 +346,7 @@ public class Main {
         }
     }
 
-    //method setDownRight
+    //This method iterates through the node and edges arraylist and finds how many edges are connected
     public static void setDownRight(ArrayList<Node> nodes, ArrayList<Edge> edges) {
         //System.out.println();
         for (Node thisNode : nodes) {
@@ -367,7 +370,8 @@ public class Main {
         }
     }
 
-    //method PickExits
+    //A method to find two nodes that only have three edges (on the sides) and label them as exits
+    //The exits must be on different sides of the maze, the outer values of the maze field are changed as well
     public static void pickExits(ArrayList<Node> nodes, int h, int w, Maze maze, boolean AddH, boolean AddW) {
         Random random = new Random();
         int spot = 0;
@@ -443,7 +447,8 @@ public class Main {
         System.out.println("Side2 " + side2 + ", spot " + spot);
     }
 
-    //method findPath
+    //This method finds the path by starting with one exit
+    //The connected edges are examined and temporary paths are created until exit is reached
     public static ArrayList<Node> findPath(Maze maze, ArrayList<Edge> edges) {
         Node Ent = maze.Exits.get(0);
         Node Ext = maze.Exits.get(1);
@@ -483,12 +488,12 @@ public class Main {
         return Path;
     }
 
-    //method copyList
+    //A method to copy an arraylist of edges
     public static ArrayList<Edge> copyList(ArrayList<Edge> List) {
         return new ArrayList<>(List);
     }
 
-    //method getOtherNode
+    //Method to find the second node connected to an edge
     public static Node getOtherNode(Edge edge, Node node) {
         if (edge.A == node) {
             return edge.B;
@@ -497,7 +502,8 @@ public class Main {
         }
     }
 
-    //method addPath
+    //This method takes the path (already determined) and adds value to the
+    //maze field so the path will be displayed
     public static void addPath(ArrayList<Node> path, int w) {
         for (int i = 0; i < path.size() - 1; i++) {
             if (path.get(i).val + 1 == path.get(i + 1).val) {
@@ -516,7 +522,7 @@ public class Main {
         }
     }
 
-    //method createField
+    //This method creates the field by iterating through the nodes of the maze
     public static void createField(Maze maze, ArrayList<Node> nodes, int h, int w, ArrayList<Node> path) {
         int[] oCords;
         for (Node thisNode : nodes) {
@@ -537,6 +543,8 @@ public class Main {
     }
 
 
+    //A class to make nodes as objects, the points within the maze that can be reached
+    //each node has a value, unique coordinates, and four possible edges
     static class Node {
         int val;
         int xCor;
@@ -568,6 +576,7 @@ public class Main {
 
         public int getVal() { return val; }
 
+        //
         public ArrayList<Edge> getConEdges() { return ConEdges; }
 
         public void editConEdges(Edge edge) {
@@ -575,6 +584,8 @@ public class Main {
         }
     }
 
+    //A class for the edges between nodes
+    //Each edge is made of two nodes and a random weight between 0 and 10
     static class Edge {
         int weight;
         ArrayList<Node> nodes;
@@ -601,6 +612,10 @@ public class Main {
         public Node getBNode() { return B; }
     }
 
+    //The object class for the maze itself
+    //Each maze is made up of the integer field, height, width, and exit locations
+    //The field values say what should be displayed.
+    //The path (sequence of edges
     static class Maze {
 
         private String path;
