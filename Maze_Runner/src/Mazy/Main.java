@@ -86,7 +86,7 @@ public class Main {
     }
 
     //Previously saved mazes are loaded once user enters correct path name
-    //The file is opened and the maze object is displayed 
+    //The file is opened and the maze object is displayed, it is now considered the new current maze 
     public static Maze loadMaze(){
         System.out.println("Enter path of maze to be loaded");
         Scanner scan = new Scanner(System.in);
