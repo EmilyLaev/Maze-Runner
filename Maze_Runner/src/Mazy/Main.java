@@ -12,7 +12,7 @@ public class Main {
 
     //This is the main running of the program.  It prints a menu for the user to pick amoung
     //the various options, to generate, load, save, display, find path, or exit
-    //A maze must already be displayed for options 3, 4 or 5 to be available.
+    //A maze must already be displayed for options 3, 4 or 5 to be available
     public static void main(String[] args) {
         boolean currentMaze = false;
         boolean on = true;
@@ -254,7 +254,7 @@ public class Main {
         return Edges;
     }
 
-    //A method to sort out which nodes are connected to which edges.
+    //A method to sort out which nodes are connected to which edges
     public static void setConEdges(ArrayList<Node> nodes, ArrayList<Edge> edges) {
         for (int i = 0; i < nodes.size(); i++) {
             Node thisNode = nodes.get(i);
